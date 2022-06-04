@@ -1,11 +1,40 @@
 .container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 88px;
-  position: absolute;
-  width: 100%;
   z-index: 10;
+  padding: 1rem 4rem;
+  border-bottom: 1px solid var(--logo-color-100);
+}
+
+.nav_links {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.nav_item {
+  margin: 0 1rem;
+  padding: 0.5rem;
+}
+
+.nav_item:first-child {
+  margin-left: 0;
+}
+
+.nav_item:hover {
+  background-color: var(--logo-color-100);
+  border-radius: 8px;
+
 }
 
 .container h1 {
@@ -19,16 +48,35 @@
 
 .btn {
   border: none;
+  padding: 0.5rem;
   background: transparent;
+  position: relative;
   display: flex;
   align-items: center;
   font-size: var(--fz-sm);
   cursor: pointer;
 }
 
+.btn:hover {
+  background-color: var(--logo-color-100);
+  border-radius: 8px;
+}
+
 .btn span {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
+  position: absolute;
+  padding: 0.1rem;
+  width: 16px;
+  height: 16px;
+  top: -5px;
+  right: 0;
+  bottom: 60%;
+  font-size: var(--fz-s);
+  color: #fff;
+  background: #1381F6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn svg {
@@ -36,7 +84,11 @@
 }
 
 @media (max-width: 876px) {
-  .container {
+
+  /* .container {
     padding: 20px 22px;
+  } */
+  .navbar {
+    padding: 0.5rem 1rem;
   }
 }

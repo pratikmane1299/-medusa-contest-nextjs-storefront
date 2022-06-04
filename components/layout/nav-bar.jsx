@@ -9,6 +9,21 @@ import MedusaLogo from "../../public/medusa-logo.svg"
 import styles from "../../styles/nav-bar.module.css"
 import { quantity, sum } from "../../utils/helper-functions"
 
+const navLinks = [
+  {
+    name: 'Medusa',
+    to: ''
+  },
+  {
+    name: 'Next.js',
+    to: ''
+  },
+  {
+    name: 'Stripe',
+    to: ''
+  },
+]
+
 export const NavBar = () => {
   const { updateCartViewDisplay } = useContext(DisplayContext)
   const { cart } = useContext(StoreContext)
@@ -26,19 +41,21 @@ export const NavBar = () => {
 
   return (
     <div className={styles.container}>
-      <Link href="/">
-        <a style={{ width: "125px" }}>
-          <Image src={MedusaLogo} height="40px" width="100%" alt="logo" />
-        </a>
-      </Link>
-      {!isCheckout ? (
-        <button className={styles.btn} onClick={() => updateCartViewDisplay()}>
-          <BiShoppingBag />{" "}
-          <span>
-            {cart.items.length > 0 ? cart.items.map(quantity).reduce(sum) : 0}
-          </span>
-        </button>
-      ) : null}
+      <div className={styles.navbar}>
+        <Link href="/">
+          <a style={{ width: "125px" }}>
+            <Image src={MedusaLogo} height="40px" width="100%" alt="logo" />
+          </a>
+        </Link>
+        {!isCheckout ? (
+          <button className={styles.btn} onClick={() => updateCartViewDisplay()}>
+            <BiShoppingBag />{" "}
+            <span>
+              {cart.items.length > 0 ? cart.items.map(quantity).reduce(sum) : 0}
+            </span>
+          </button>
+        ) : null}
+      </div>
     </div>
   )
 }

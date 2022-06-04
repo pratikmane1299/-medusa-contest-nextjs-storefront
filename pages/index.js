@@ -1,10 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from "../styles/home.module.css";
 import Link from "next/link";
+import Image from 'next/image';
 import { createClient } from "../utils/client";
 import { FaGithub } from "react-icons/fa";
 import { formatPrices } from "../utils/prices";
 import { useContext } from "react";
 import StoreContext from "../context/store-context";
+
+const tags = [
+  { name: "Medusa", to: "https://www.medusa-commerce.com/" },
+  { name: "Next.js", to: "https://nextjs.org/docs/getting-started" },
+  { name: "Stripe", to: "https://stripe.com/docs" },
+];
 
 export default function Home({ products }) {
   const { cart } = useContext(StoreContext)
@@ -24,7 +32,24 @@ export default function Home({ products }) {
             commerce engine. Integrate seamlessly with any 3rd party tools for a
             best-in-breed commerce stack.
           </p>
-          <div className={styles.tags}>
+          <div style={{}}>
+            {tags.map((tag, index) => (
+              // <li key={index}>
+              <a
+                key={index}
+                href={tag.to}
+                className={styles.tag}
+                target="_blank"
+                rel="noreferrer"
+                role="button"
+                style={{ marginRight: "0.5rem" }}
+              >
+                {tag.name}
+              </a>
+              // </li>
+            ))}
+          </div>
+          {/* <div className={styles.tags}>
             <div className={styles.tag} style={{ background: "lightgrey" }}>
               v{process.env.NEXT_PUBLIC_APP_VERSION}
             </div>
@@ -67,14 +92,14 @@ export default function Home({ products }) {
                 Stripe
               </div>
             </a>
-          </div>
+          </div> */}
           <div className={styles.links}>
             <a
               href="https://docs.medusa-commerce.com/"
               target="_blank"
               rel="noreferrer"
               role="button"
-              className={styles.btn}
+              className={`${styles.btn} ${styles.primary_btn}`}
             >
               Read the docs
               <svg
@@ -94,7 +119,7 @@ export default function Home({ products }) {
               target="_blank"
               rel="noreferrer"
               role="button"
-              className={styles.btn}
+              className={`${styles.btn} ${styles.tranparent_btn}`}
             >
               View on GitHub
               <FaGithub />
@@ -102,7 +127,7 @@ export default function Home({ products }) {
           </div>
         </div>
         <div className={styles.products}>
-          <h2>Demo Products</h2>
+          <h2>Checkout our store</h2>
           <div className={styles.grid}>
             {products &&
               products.map((p) => {
@@ -113,9 +138,14 @@ export default function Home({ products }) {
                       passHref
                     >
                       <a>
-                        <div>
-                          <h2>{p.title}</h2>
-                          <p>{formatPrices(cart, p.variants[0])}</p>
+                        <div className={styles.product_thumbnail}>
+                          <img src={p.thumbnail} alt={p.title} />
+                        </div>
+                        <div className={styles.product_info}>
+                          <h2 className={styles.product_title}>{p.title}</h2>
+                          <p className={styles.product_price}>
+                            {formatPrices(cart, p.variants[0])}
+                          </p>
                         </div>
                       </a>
                     </Link>
